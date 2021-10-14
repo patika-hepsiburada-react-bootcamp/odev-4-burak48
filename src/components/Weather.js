@@ -1,10 +1,12 @@
 import React from "react";
 
-import { useQuery } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import { WEATHER_QUERY } from "./queries";
 
 function Weather() {
-  const { loading, error, data } = useQuery(WEATHER_QUERY);
+  const [getWeather, { loading, error, data }] = useLazyQuery(WEATHER_QUERY, {
+    variables: { name: "Istanbul" },
+  });
 
   if (loading) {
     return <div>Loading...</div>;
@@ -14,7 +16,10 @@ function Weather() {
     return <div>Error: {error}</div>;
   }
 
-  console.log("DATA :", data);
+  if (data) {
+    console.log("DATA :", data);
+  }
+
   return (
     <div>
       <h1>Weathers</h1>
@@ -23,7 +28,7 @@ function Weather() {
           <h1 className="heading">Weather App</h1>
           <form>
             <input type="text" placeholder="Search for a city" autoFocus />
-            <button type="submit">SUBMIT</button>
+            <button onClick={() => getWeather()}>SUBMIT</button>
           </form>
         </div>
       </section>
