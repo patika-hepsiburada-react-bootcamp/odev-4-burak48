@@ -21,12 +21,18 @@ function Weather() {
     console.log("DATA :", data);
   }
 
+  const handleSubmit = (e) => {
+    getWeather();
+    e.preventDefault();
+    e.target.reset();
+  };
+
   return (
     <div>
       <section className="top-banner">
         <div className="container">
           <h1 className="heading">Weather App</h1>
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="Search for a city"
@@ -35,7 +41,7 @@ function Weather() {
                 setCity(event.target.value);
               }}
             />
-            <button onClick={() => getWeather()}>SUBMIT</button>
+            <button>SUBMIT</button>
           </form>
         </div>
       </section>
