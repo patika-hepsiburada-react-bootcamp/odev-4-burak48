@@ -13,7 +13,20 @@ export const WEATHER_QUERY = gql`
         }
         temperature {
           actual
+          feelsLike
+          min
+          max
         }
+        wind {
+          speed
+          deg
+        }
+        clouds {
+          all
+          visibility
+          humidity
+        }
+        timestamp
       }
     }
   }
