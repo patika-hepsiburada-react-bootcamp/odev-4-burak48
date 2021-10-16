@@ -22,7 +22,10 @@ function Weather() {
   }
 
   const handleSubmit = (e) => {
-    getWeather();
+    if (e.target[0].value) {
+      setCity(e.target[0].value);
+      getWeather();
+    }
     e.preventDefault();
     e.target.reset();
   };
@@ -33,14 +36,7 @@ function Weather() {
         <div className="container">
           <h1 className="heading">Weather App</h1>
           <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              placeholder="Search for a city"
-              autoFocus
-              onChange={(event) => {
-                setCity(event.target.value);
-              }}
-            />
+            <input type="text" placeholder="Search for a city" autoFocus />
             <button>SUBMIT</button>
           </form>
         </div>
